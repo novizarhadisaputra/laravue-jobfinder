@@ -3,6 +3,7 @@
 use App\Models\ArticleType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 
 class CreateArticlesTypesTable extends Migration
@@ -29,7 +30,7 @@ class CreateArticlesTypesTable extends Migration
                 'created_at' => Carbon::now(),
             ]
         ];
-        Role::insert($data);
+        ArticleType::insert($data);
     }
 
     /**
