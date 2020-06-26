@@ -17,6 +17,7 @@ class CreateJobsSeekersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

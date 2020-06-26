@@ -19,7 +19,10 @@ class CreateArticlesTable extends Migration
             $table->string('image');
             $table->unsignedBigInteger('articles_types_id');
             $table->string('content');
-            $table->unsignedBigInteger('users_id');
+            $table->string('status');
+            $table->bigInteger('like');
+            $table->unsignedBigInteger('creator');
+            $table->unsignedBigInteger('publisher')->nullable();
             $table->unsignedBigInteger('companies_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

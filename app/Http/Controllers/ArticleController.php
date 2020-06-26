@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticle;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -14,7 +18,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -33,9 +37,26 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArticle $request)
     {
-        //
+        $validated = $request->validated();
+        $request->request->add([
+            'creator' => Auth::user()->id,
+            'status' => 'Pending',
+        ]);
+        if ($request->hasFile('image')) {
+            $fileName = Str::slug(Carbon::now() . ' ' . $request->file('image')->getClientOriginalName());
+            $extentionsFile = $request->file('image')->extension();
+            $pathImage = Storage::disk('public')->put($fileName . $extentionsFile, $request->image, 'public');
+            $request->merge(['image' => $pathImage]);
+        }
+
+        try {
+            $article = Article::create($request->input());
+            return \responseBuilder($article, 200);
+        } catch (Exception $e) {
+            return \responseBuilder($e->getMessage(), 500);
+        }
     }
 
     /**

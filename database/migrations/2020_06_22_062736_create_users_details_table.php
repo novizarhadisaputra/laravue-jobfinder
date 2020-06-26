@@ -16,10 +16,10 @@ class CreateUsersDetailsTable extends Migration
         Schema::create('users_details', function (Blueprint $table) {
             $table->id();
             $table->string('profile_picture');
-            $table->string('provinces_id');
-            $table->string('cities_id');
-            $table->string('districts_id');
-            $table->string('subdistricts_id');
+            $table->unsignedBigInteger('provinces_id');
+            $table->unsignedBigInteger('cities_id');
+            $table->unsignedBigInteger('districts_id');
+            $table->unsignedBigInteger('subdistricts_id');
             $table->text('address');
             $table->string('zip_code');
             $table->string('phone');

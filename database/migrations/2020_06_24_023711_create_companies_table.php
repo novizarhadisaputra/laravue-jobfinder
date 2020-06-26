@@ -26,6 +26,7 @@ class CreateCompaniesTable extends Migration
             $table->string('zip_code');
             $table->string('phone');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

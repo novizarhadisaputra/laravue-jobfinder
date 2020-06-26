@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreJobSeeker;
-use App\Models\JobSeeker;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
-class JobSeekerController extends Controller
+class ProvinceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class JobSeekerController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -34,18 +33,18 @@ class JobSeekerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreJobSeeker $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\JobSeeker  $jobSeeker
+     * @param  \App\Models\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function show(JobSeeker $jobSeeker)
+    public function show(Province $province)
     {
         //
     }
@@ -53,10 +52,10 @@ class JobSeekerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\JobSeeker  $jobSeeker
+     * @param  \App\Models\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobSeeker $jobSeeker)
+    public function edit(Province $province)
     {
         //
     }
@@ -65,10 +64,10 @@ class JobSeekerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\JobSeeker  $jobSeeker
+     * @param  \App\Models\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobSeeker $jobSeeker)
+    public function update(Request $request, Province $province)
     {
         //
     }
@@ -76,10 +75,10 @@ class JobSeekerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\JobSeeker  $jobSeeker
+     * @param  \App\Models\Province  $province
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobSeeker $jobSeeker)
+    public function destroy(Province $province)
     {
         //
     }

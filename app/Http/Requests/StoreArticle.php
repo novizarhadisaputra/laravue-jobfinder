@@ -13,7 +13,7 @@ class StoreArticle extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,20 @@ class StoreArticle extends FormRequest
     {
         return [
             'title' => 'required',
-            'image' => 'required',
-            'content' => 'required'
+            'image' => 'required|mimes:png,jpg,jpeg',
+            'content' => 'required',
+            'articles_types_id' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Field title is required!',
+            'image.required' => 'Field image is required!',
+            'image.mimes' => 'Format image png, jpg, jpeg',
+            'content.required' => 'Field content is required!',
+            'articles_types_id' => 'Field article type is required'
         ];
     }
 }
