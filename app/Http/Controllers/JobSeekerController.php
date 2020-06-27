@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreJobSeeker;
+use App\Http\Requests\StoreUser;
 use App\Models\JobSeeker;
 use Illuminate\Http\Request;
 
@@ -34,7 +34,7 @@ class JobSeekerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreJobSeeker $request)
+    public function store(StoreUser $request)
     {
         $validated = $request->validated();
     }

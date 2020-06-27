@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Employer;
 use App\Models\JobSeeker;
+use App\Models\UserDetail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,8 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'api_token',
-        'roles_id'
+        'api_token'
     ];
 
     /**
@@ -45,13 +45,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function details()
+    {
+        return $this->hasOne(UserDetail::class, 'users_id', 'id');
+    }
+
     public function jobseekers()
     {
-        return $this->hasMany(JobSeeker::class);
+        return $this->hasMany(JobSeeker::class, 'users_id', 'id');
     }
 
     public function employers()
     {
-        return $this->hasMany();
+        return $this->hasMany(Employer::class, 'users_id', 'id');
     }
 }
