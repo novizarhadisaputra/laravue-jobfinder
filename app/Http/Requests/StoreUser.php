@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreUser extends FormRequest
 {
@@ -25,7 +26,7 @@ class StoreUser extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required|confirmed|min:8',
         ];
     }
@@ -34,6 +35,7 @@ class StoreUser extends FormRequest
     {
         return [
             'email.required' => 'Field email is required!',
+            'email.unique' => 'Email has registered!',
             'name.required' => 'Field name is required!',
             'password.required' => 'Field password is required!',
             'password.min' => 'Field password minimal 8 character',

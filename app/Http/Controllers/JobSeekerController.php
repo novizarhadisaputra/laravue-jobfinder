@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CustomRegistered;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
 use App\Models\JobSeeker;
+use App\Models\UserDetail;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class JobSeekerController extends Controller
 {
@@ -15,7 +20,11 @@ class JobSeekerController extends Controller
      */
     public function index()
     {
-
+        try {
+            return \responseBuilder(JobSeeker::all(), 200);
+        } catch (\Exception $e) {
+            return \responseBuilder($e->getMessage(), 500);
+        }
     }
 
     /**
@@ -37,6 +46,16 @@ class JobSeekerController extends Controller
     public function store(StoreUser $request)
     {
         $validated = $request->validated();
+        try {
+            $request->merge(['api_token' => Str::random(80)]);
+            $user = User::create($request->input());
+            $userDetail = UserDetail::create(['users_id' => $user->id]);
+            $jobSeeker = JobSeeker::create(['users_id' => $user->id]);
+            event(new CustomRegistered($user));
+            return \responseBuilder($user, 200);
+        } catch (\Exception $e) {
+            return \responseBuilder($e->getMessage(), 500);
+        }
     }
 
     /**
@@ -45,9 +64,13 @@ class JobSeekerController extends Controller
      * @param  \App\JobSeeker  $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function show(JobSeeker $jobSeeker)
+    public function show(JobSeeker $jobseeker)
     {
-        //
+        try {
+            return \responseBuilder($jobseeker, 200);
+        } catch (\Exception $e) {
+            return \responseBuilder($e->getMessage(), 500);
+        }
     }
 
     /**
@@ -56,7 +79,7 @@ class JobSeekerController extends Controller
      * @param  \App\JobSeeker  $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobSeeker $jobSeeker)
+    public function edit(JobSeeker $jobseeker)
     {
         //
     }
@@ -68,9 +91,17 @@ class JobSeekerController extends Controller
      * @param  \App\JobSeeker  $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, JobSeeker $jobSeeker)
+    public function update(UpdateUser $request, JobSeeker $jobseeker)
     {
-        //
+        $validated = $request->validated();
+        try {
+            $user = User::update($request->input());
+            $userDetail = UserDetail::update($request->input());
+            $jobseeker->update($request->input());
+            return \responseBuilder($user, 200);
+        } catch (\Exception $e) {
+            return \responseBuilder($e->getMessage(), 500);
+        }
     }
 
     /**
@@ -79,8 +110,13 @@ class JobSeekerController extends Controller
      * @param  \App\JobSeeker  $jobSeeker
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobSeeker $jobSeeker)
+    public function destroy(JobSeeker $jobseeker)
     {
-        //
+        try {
+            $jobseeker->delete();
+            return responseBuilder(null, 204);
+        } catch (\Exception $e) {
+            return \responseBuilder($e->getMessage(), 500);
+        }
     }
 }

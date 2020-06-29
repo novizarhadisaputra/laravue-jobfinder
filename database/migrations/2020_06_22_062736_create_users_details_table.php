@@ -15,17 +15,18 @@ class CreateUsersDetailsTable extends Migration
     {
         Schema::create('users_details', function (Blueprint $table) {
             $table->id();
-            $table->string('profile_picture');
-            $table->unsignedBigInteger('provinces_id');
-            $table->unsignedBigInteger('cities_id');
-            $table->unsignedBigInteger('districts_id');
-            $table->unsignedBigInteger('subdistricts_id');
-            $table->text('address');
-            $table->string('zip_code');
-            $table->string('phone');
-            $table->string('skills');
-            $table->string('identity');
-            $table->string('number_identity');
+            $table->unsignedBigInteger('users_id');
+            $table->string('profile_picture')->nullable();
+            $table->unsignedBigInteger('provinces_id')->nullable();
+            $table->unsignedBigInteger('cities_id')->nullable();
+            $table->unsignedBigInteger('districts_id')->nullable();
+            $table->unsignedBigInteger('subdistricts_id')->nullable();
+            $table->text('address')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('identity')->nullable();
+            $table->string('number_identity')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

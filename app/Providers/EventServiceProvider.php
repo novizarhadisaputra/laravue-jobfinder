@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\ArticleCreated;
+use App\Events\CustomRegistered;
 use App\Listeners\ArticleNotificationMail;
+use App\Listeners\SendEmailVerificationMail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ArticleCreated::class => [
             ArticleNotificationMail::class,
+        ],
+        CustomRegistered::class => [
+            SendEmailVerificationMail::class,
         ],
     ];
 

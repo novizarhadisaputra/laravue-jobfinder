@@ -9,5 +9,5 @@ function responseBuilder($collection, $code)
         'messages_code' => Response::$statusTexts[$code],
         'data' => $collection,
     ];
-    return response($data);
+    return response($data, $code);
 }

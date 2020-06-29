@@ -13,6 +13,10 @@ class JobSeeker extends Model
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
     protected $table = 'jobs_seekers';
 
+    protected $fillable = [
+        'users_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id');

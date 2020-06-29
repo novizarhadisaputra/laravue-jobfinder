@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUser;
 use App\Models\Employer;
 use App\User;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class EmployerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
         //
     }
@@ -68,7 +69,7 @@ class EmployerController extends Controller
      * @param  \App\Models\Employer  $employer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employer $employer)
+    public function update(UpdateUser $request, Employer $employer)
     {
         //
     }
